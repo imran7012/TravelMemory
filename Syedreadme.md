@@ -41,7 +41,7 @@
       │   └── url.js - # Changes Made
       │
       ├── .gitignore
-      ├── Dockerfile - # Need to be created
+      ├── Dockerfile - # Frontend Dockerfile
       ├── nginx.conf
       ├── package-lock.json
       ├── package.json
@@ -71,7 +71,7 @@
       │   └── (API route definitions)
       │
       ├── conn.js           # MongoDB connection file
-      ├── Dockerfile        # Backend container image build file (Need to be created)
+      ├── Dockerfile        # Backend Dockerfile
       ├── index.js          # Main Express server entry point
       ├── package-lock.json
       └── package.json
