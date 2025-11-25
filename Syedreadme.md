@@ -86,7 +86,7 @@
 
       Docker push <dockerhubusername/imagename>
 
-   Once pushed the images to dockerhub, Please replace the image names in fromtend and backend yaml files
+   Once pushed the images to dockerhub, Please replace the image names in frontend and backend deployment yaml files
       
    <img width="692" height="687" alt="image" src="https://github.com/user-attachments/assets/49882f4e-d049-4731-8a00-ccce29c8f500" />
 
