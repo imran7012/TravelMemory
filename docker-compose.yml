@@ -1,0 +1,59 @@
+services:
+  mongo:
+    image: mongo:6
+    container_name: tm-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    # Optional: expose for local tools like Compass
+    ports:
+      - "27017:27017"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tm-backend
+    restart: unless-stopped
+    environment:
+      # DB name 'travelmemory' is arbitrary; change if you want
+      MONGO_URI: mongodb://mongo:27017/travelmemory
+      PORT: 3001
+      NODE_ENV: production
+    depends_on:
+      - mongo
+    ports:
+      - "3001:3001"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tm-frontend
+    restart: unless-stopped
+    environment:
+      # IMPORTANT: use the service name 'backend' on the compose network
+      REACT_APP_BACKEND_URL: http://localhost:3001
+      PORT: 3000
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+  
+  mongo-express:
+    image: mongo-express:latest
+    container_name: tm-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH_USERNAME: admin        # optional UI login
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123     # optional UI login
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:

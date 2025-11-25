@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tmb13db
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tmb13be
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tmb13fe

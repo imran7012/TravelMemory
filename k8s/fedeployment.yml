@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fedeployment
+  namespace: tmb13fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: imran7012/tm-frontend:v3
+          ports:
+            - containerPort: 3000
+          env:
+          # - name: BROWSER
+          #   value: "none"
+          # - name: PORT
+          #   value: "3010"
+          - name: REACT_APP_BACKEND_URL
+            value: "http://a1956b451d014418cbf4b54c92d5dba9-2142825845.ap-south-1.elb.amazonaws.com:3001"
